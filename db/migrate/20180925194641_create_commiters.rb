@@ -1,7 +1,7 @@
 class CreateCommiters < ActiveRecord::Migration[5.1]
   def change
     create_table :committers do |t|
-      t.string :repo, limit: 100
+      t.string :repo
       t.string :user, limit: 39
       t.integer :total, unsigned: true
       t.integer :place, unsigned: true

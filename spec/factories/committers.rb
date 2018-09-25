@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :committer do
     repo { uniqid }
-    user { uniqid }
+    author { uniqid }
     stock { uniqp }
     sequence(:place) { |n| n }
     sequence(:total) { |n| n }

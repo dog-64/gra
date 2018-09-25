@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180925195215) do
+ActiveRecord::Schema.define(version: 20180925211834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "committers", force: :cascade do |t|
     t.string "repo", limit: 100
-    t.string "user", limit: 39
+    t.string "author", limit: 39
     t.integer "total"
     t.integer "place"
     t.integer "stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["repo", "user", "place"], name: "index_committers_on_repo_and_user_and_place", unique: true
+    t.index ["repo", "author", "place"], name: "index_committers_on_repo_and_author_and_place", unique: true
     t.index ["stock", "place"], name: "index_committers_on_stock_and_place"
   end
 
