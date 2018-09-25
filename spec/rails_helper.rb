@@ -53,19 +53,6 @@ Webrat.configure do |config|
   # config.mode = :rack
 end
 
-# имитация запросов к сервису курсов
-def mock_rate_service
-  stub_request(:get, Rails.configuration.rate_url).
-      with(
-          headers: {
-              'Accept' => '*/*',
-              'Accept-Encoding' => 'gzip, deflate',
-              'Host' => Rails.configuration.rate_host,
-              'User-Agent' => 'rest-client/2.0.2 (darwin16.5.0 x86_64) ruby/2.4.1p111'
-          }).
-      to_return(status: 200, body: '{"USD_RUB":{"val":62.804001}}', headers: {})
-end
-
 require 'capybara/rails'
 require 'capybara/rspec'
 require "action_cable/testing/rspec"

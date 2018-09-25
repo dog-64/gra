@@ -1,0 +1,33 @@
+<div class="row">
+  <form class="form-inline col-md-12" action="/url" method="get">
+    <label class="sr-only" for="url">Repo</label>
+    <input type="text" class="form-control mb-2 mr-sm-2 span-10"
+           id="url"
+           name="url"
+           placeholder="https://github.com/rails/rails"
+           value="<%= params[:url] %>">
+    <button type="submit" class="btn btn-primary mb-2 span-2">Search</button>
+  </form>
+</div>
+<% if @commiters.present? %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Place</th>
+      <th>Committer</th>
+      <th>Commits</th>
+      <th></th>
+    </tr>
+    </thead>
+    <% @commiters.each do |cmtr| %>
+      <tr>
+        <td><%= cmtr[:place] %></td>
+        <th><%= cmtr[:author] %></th>
+        <td><%= cmtr[:total] %></td>
+        <td><a href="pdf/#{cmtr[:author]}/#{cmtr[:place]}">download pdf</a></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <a href="#">Download Zip (3)</a>
+<% end %>
