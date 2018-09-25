@@ -3,7 +3,7 @@ class Repo
   require 'net/http'
   require 'json'
 
-  # взяти данных о комиттерах репозитория
+  # взятие данных о комиттерах репозитория
   # @param url String
   # @result Hash
   def self.get(url)

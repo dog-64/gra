@@ -60,6 +60,7 @@ group :development, :test do
 
   gem 'action-cable-testing'
   gem 'spring-commands-rspec'
+  gem "factory_bot_rails", "~> 4.0"
 end
 
 group :development do
