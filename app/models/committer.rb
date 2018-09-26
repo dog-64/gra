@@ -54,7 +54,7 @@ class Committer < ApplicationRecord
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       input_filenames.each do |filename|
-        zipfile.add(filename, filename)
+        zipfile.add(File.basename(filename), filename)
       end
     end
     zipfile_name
