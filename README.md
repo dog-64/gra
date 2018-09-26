@@ -14,13 +14,15 @@
 Код, конечно же, должен быть на Гитхабе.
 
 Примеры экранов приложения:
+
 ![Страница /](http://duletsky.com/gra/tz-1.png)
 
 
 Пример PDF диплома:
+
 ![Страница /](http://duletsky.com/gra/tz-1.png)
 
-## Главные ссылки
+## Ссылки
 
 - сайт - https://pacific-harbor-69812.herokuapp.com
 - репозиторий - https://github.com/dog-64/gra
