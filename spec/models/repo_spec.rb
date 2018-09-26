@@ -5,6 +5,17 @@ require 'webmock/rspec'
 describe Repo do
   before(:each) {mock_github}
 
+  describe 'url_4api' do
+    it 'awesome-elixir' do
+      expect(Repo.url_4api('https://github.com/h4cc/awesome-elixir')).not_to be nil
+    end
+    it 'elixir' do
+      expect(Repo.url_4api('https://github.com/elixir-lang/elixir')).not_to be nil
+    end
+    it 'rails' do
+      expect(Repo.url_4api('https://github.com/rails/rails')).not_to be nil
+    end
+  end
   describe 'get' do
     it 'ok' do
       r = Repo.get('https://github.com/rails/rails')

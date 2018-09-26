@@ -16,7 +16,7 @@ class Repo
   # приведение url репозитория к url запроса к api github
   # @param url String адрес репо
   # @result String
-  private_class_method def self.url_4api(url)
+  def self.url_4api(url)
     return if url.blank?
     return unless url =~ %r{(https|http)://github.com/([^/]+)/([^/]+)}
 

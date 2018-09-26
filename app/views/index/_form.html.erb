@@ -1,11 +1,21 @@
-<form class="form-inline col-md-12 " action="/url">
-  <!--  <label class="sr-only" for="inlineFormInputName2">Repo</label>-->
-  <input type="text" class="form-control mb-2 mr-sm-2 col-md-9 "
-         id="url"
-         name="url"
-         placeholder="https://github.com/rails/rails"
-         value="<%= params[:url] %>"
-         autofocus="autofocus">
-
-  <button type="submit" class="btn btn-primary mb-2 col-md-2">Search</button>
+<form action="/url">
+  <div class="form-row align-items-center w-100">
+    <div class="col-auto w-75">
+      <label class="sr-only" for="inlineFormInput">Repo</label>
+      <input type="text" class="form-control"
+             id="url"
+             name="url"
+             placeholder="https://github.com/rails/rails"
+             value="<%= params[:url] %>"
+             autofocus="autofocus">
+    </div>
+    <div class="col-auto w-25 align-top">
+      <button type="submit" class="btn btn-primary mt-2 mb-2 w-100 align-top">Search</button>
+    </div>
+  </div>
+  <blockquote class="ml-2 small">
+      https://github.com/rails/rails
+      <br/>
+      https://github.com/h4cc/awesome-elixir
+  </blockquote>
 </form>
