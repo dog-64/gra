@@ -7,6 +7,9 @@ class Committer < ApplicationRecord
   validates :place, presence: true
   validates :stock, presence: true
 
+  # каталог для записи 
+  DIR = 'tmp/awards'.freeze
+
   # запись в БД топа комиттеров в репо
   # @params url String адрес репозитория
   # @params ActiveRecord::Relation список записей
@@ -22,7 +25,7 @@ class Committer < ApplicationRecord
   def self.pdf(id)
     return unless (cmtr = Committer.find_by(id: id.to_i))
 
-    Prawn::Document.generate(r = "tmp/award_#{cmtr.stock}_#{cmtr.author}_#{cmtr.place}.pdf") do
+    Prawn::Document.generate(r = "#{DIR}/award_#{cmtr.stock}_#{cmtr.author}_#{cmtr.place}.pdf") do
       move_down(200)
       text "PDF ##{cmtr.place}", align: :center, size: 48
 
@@ -46,7 +49,7 @@ class Committer < ApplicationRecord
 
     input_filenames = cmtrs.inject([]) { |sum, cmtr| sum << Committer.pdf(cmtr.id) }
 
-    zipfile_name = "tmp/awards_#{params[:id]}.zip"
+    zipfile_name = "#{DIR}/awards_#{params[:id]}.zip"
     File.unlink(zipfile_name) if File.file?(zipfile_name)
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
@@ -55,6 +58,11 @@ class Committer < ApplicationRecord
       end
     end
     zipfile_name
+  end
+
+  # очистка временных файлов
+  def self.zap
+    FileUtils.rm_rf("#{Rails.root}/#{DIR}/.", secure: true)
   end
 
   # запись комитеров в таблицу БД
