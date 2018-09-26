@@ -1,6 +1,6 @@
-= Учи.Ру - тестовое задание - генерация pdf-дипломов для контрибуторов
+# Учи.Ру - тестовое задание - генерация pdf-дипломов для контрибуторов
 
-== Тестовое задание для Ruby On Rails разработчика
+## Тестовое задание для Ruby On Rails разработчика
 
 Мы в UCHi.RU пишем на руби и нам часто приходится иметь дело с обработкой JSON.
 Ещё мы проводим онлайн-олимпиады и генерируем pdf-дипломы на лету.
@@ -13,31 +13,32 @@
 и разверните его на любой публичной платформе (например, на бесплатном аккаунте в Хероку).
 Код, конечно же, должен быть на Гитхабе.
 
-=== Полезные ссылки, которые могут пригодится:
-
-Git:
-https://git-scm.com/book/en/v2
-https://proglib.io/p/git-for-half-an-hour
-http://gitimmersion.com/index.html
-https://learngitbranching.js.org
-https://try.github.io/levels/1/challenges/3
-
-Docker:
-https://www.docker.com
-https://habrahabr.ru/post/253877
-http://rus-linux.net/MyLDP/vm/docker/docker-tutorial.html
-https://proglib.io/p/docker
-https://habrahabr.ru/post/310460
-
-Хероку:
-https://blog.heroku.com/container-registry-and-runtime
-https://devcenter.heroku.com/articles/container-registry-and-runtime
-
 Примеры экранов приложения:
+![Страница /](http://duletsky.com/gra/tz-1.png)
+
 
 Пример PDF диплома:
+![Страница /](http://duletsky.com/gra/tz-1.png)
 
-== Главные ссылки
+## Главные ссылки
 
-- [хостинг](https://pacific-harbor-69812.herokuapp.com/)
-- [репозиторий](https://github.com/dog-64/gra)
+- сайт - https://pacific-harbor-69812.herokuapp.com
+- репозиторий - https://github.com/dog-64/gra
+
+## Реализация
+
+![Страница /](http://duletsky.com/gra/Gra.png)
+
+- доступ к Github Api анонимный, 
+  т.е ограниченный 50 запросами в час. 
+  Для тестирования и оценки достаточно.
+  Но, при необходимости, несложно 
+  добавить авторизованный доступ. 
+- heroku-scheduler не подключен, ибо требует указания кредитки.
+  Но rake задача для него написана - committers:zap.
+  Задача чистит временные файлы pdf и zip.
+- каждый запрос по репозиторию приводит к запросу к Api Guthub.
+  Как развитие темы, можно было бы его закешировать 
+  примерно на час
+
+_Олег Дулецкий_
