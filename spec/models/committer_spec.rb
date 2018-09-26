@@ -14,6 +14,11 @@ describe Committer, type: :model do
     expect(FactoryBot.create(:committer)).not_to be nil
   end
 
+  describe 'pdf' do
+    it ('nil') { expect(Committer.pdf(nil)).to be nil }
+    it ('string') { expect(Committer.pdf('xxx')).to be nil }
+  end
+
   describe 'create_by_url' do
     it 'ok' do
       expect(Committer.create_by_url(URL)).not_to be nil
