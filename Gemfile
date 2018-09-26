@@ -41,11 +41,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara' , '> 2.13'
+  gem 'capybara', '> 2.13'
   gem 'selenium-webdriver'
-
-  # gem 'pry'
-  # gem 'pry-nav'
 
   gem 'rspec', '~> 3.6.0'
   gem 'rspec-its'
@@ -74,7 +71,7 @@ group :development do
 end
 
 group :test do
-  # gem 'launchy' # показ страницы в rspec по save_and_open_page
+  gem 'launchy' # показ страницы в rspec по save_and_open_page
   gem 'simplecov', require: false
   gem 'webdrivers'
   gem 'webrat'
@@ -93,7 +90,6 @@ gem 'derailed_benchmarks', group: :development # анализ испольова
 
 gem 'json'
 gem 'nokogiri'
-# gem 'mysql2', '~> 0.3.18'
 
 gem 'prawn' # генерация pdf
 gem 'jquery-rails'

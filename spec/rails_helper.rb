@@ -4,6 +4,11 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'webrat'
 require 'simplecov'
+
+require 'capybara/rails'
+require 'capybara/rspec'
+require "action_cable/testing/rspec"
+
 SimpleCov.start
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -43,6 +48,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.include Capybara::DSL
   config.include Rails.application.routes.url_helpers
   config.infer_spec_type_from_file_location!
 
@@ -53,10 +59,6 @@ Webrat.configure do |config|
   # config.mode = :rack
 end
 
-require 'capybara/rails'
-require 'capybara/rspec'
-require "action_cable/testing/rspec"
-
 # имитация запросов к github
 def mock_github
   body = '[' \
@@ -64,13 +66,14 @@ def mock_github
       '{"total": 3945, "author": {"login": "dhh"}},' \
       '{"total": 4220, "author": {"login": "tenderlove"}}' \
       ']'
-  stub_request(:get, 'https://api.github.com/repos/rails/rails/stats/contributors').
-      with(
-          headers: {
-              'Accept' => '*/*',
-              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'Host' => 'api.github.com',
-              'User-Agent' => 'Ruby'
-          }).
-      to_return(status: 200, body: body, headers: {})
+  stub_request(:get, %r{https://api.github.com/repos/.*/.*/stats/contributors})
+    .with(
+      headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Host' => 'api.github.com',
+        'User-Agent' => 'Ruby'
+      }).
+    to_return(status: 200, body: body, headers: {})
 end
+

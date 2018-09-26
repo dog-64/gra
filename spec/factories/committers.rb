@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :committer do
-    repo { uniqid }
+    repo { "https://github.com/#{uniqp}/#{uniqp}" }
     author { uniqid }
     stock { uniqp }
     sequence(:place) { |n| n }
