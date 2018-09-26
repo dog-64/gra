@@ -34,15 +34,16 @@ class Committer < ApplicationRecord
     r
   end
 
-  private
-
-  def self.committers_2table(committers, url)
+  # запись комитеров в таблицу БД
+  # старые по этому репо удаляются
+  private_class_method def self.committers_2table(committers, url)
     Committer.where(repo: url).delete_all
     ids = committers_create(committers, url)
     Committer.where(stock: ids[0])
   end
 
-  def self.committers_create(committers, url)
+  # создание записей в таблице БД по переданным комитерам
+  private_class_method def self.committers_create(committers, url)
     ids = []
     Committer.transaction do
       committers.each do |cmt|

@@ -16,7 +16,7 @@ class Repo
   # приведение url репозитория к url запроса к api github
   # @param url String адрес репо
   # @result String
-  def self.url_4api(url)
+  private_class_method def self.url_4api(url)
     return if url.blank?
     return unless url =~ %r{(https|http)://github.com/([^/]+)/([^/]+)}
 
@@ -26,7 +26,7 @@ class Repo
   # приведение url репозитория к url запроса к api github
   # @param uri String адрес запроса к api github
   # @result String
-  def self.api_call(uri)
+  private_class_method def self.api_call(uri)
     result = nil
     begin
       json = Net::HTTP.get(uri)
@@ -42,7 +42,7 @@ class Repo
   # форматирование данных о комитерах
   # @params committers Hash комитеры
   # @result Hash
-  def self.committers_format(committers)
+  private_class_method def self.committers_format(committers)
     # контрибуторы уже упорядочены в json, от меньших к большим
     committers.map { |rs| { total: rs['total'], author: rs['author']['login'] } }
         .last(3)

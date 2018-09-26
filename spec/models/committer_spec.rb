@@ -17,6 +17,14 @@ describe Committer, type: :model do
   describe 'pdf' do
     it ('nil') { expect(Committer.pdf(nil)).to be nil }
     it ('string') { expect(Committer.pdf('xxx')).to be nil }
+    it ('not exist') { expect(Committer.pdf(uniqp)).to be nil }
+    it ('ok') do
+      cmtr = FactoryBot.create(:committer)
+      r = Committer.pdf(cmtr.id)
+      expect(r).not_to be nil
+      expect(r).not_to be nil
+
+    end
   end
 
   describe 'create_by_url' do
