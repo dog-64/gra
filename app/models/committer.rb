@@ -8,7 +8,7 @@ class Committer < ApplicationRecord
   validates :stock, presence: true
 
   # каталог для записи 
-  DIR = 'tmp/awards'.freeze
+  DIR = "#{Rails.root}/temp/awards".freeze
 
   # запись в БД топа комиттеров в репо
   # @params url String адрес репозитория
@@ -62,7 +62,7 @@ class Committer < ApplicationRecord
 
   # очистка временных файлов
   def self.zap
-    FileUtils.rm_rf("#{Rails.root}/#{DIR}/.", secure: true)
+    FileUtils.rm_rf("#{DIR}/.", secure: true)
   end
 
   # запись комитеров в таблицу БД
