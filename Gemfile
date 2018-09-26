@@ -97,3 +97,4 @@ gem 'mysql2', '~> 0.3.18'
 
 gem 'prawn' # генерация pdf
 gem 'jquery-rails'
+gem 'rubyzip' # создание архивов

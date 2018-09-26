@@ -10,6 +10,7 @@ RSpec.describe 'Pdf', type: :request do
       cmtr = FactoryBot.create(:committer)
       get pdf_path(cmtr.id)
       expect(response).to have_http_status(200)
+      expect(response.content_type).to eq 'application/pdf'
     end
   end
 end

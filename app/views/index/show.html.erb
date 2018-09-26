@@ -20,12 +20,18 @@
         <td><%= cmtr.place %></td>
         <th><%= cmtr.author %></th>
         <td><%= cmtr.total %></td>
-        <td><a href="<%= pdf_path(cmtr.id) %>" class="btn btn-info float-right col-md-6">download pdf</a></td>
+        <td>
+          <a href="<%= pdf_path(cmtr.id) %>" class="btn btn-info float-right col-md-6" download="pdf">
+            download pdf
+          </a>
+        </td>
       </tr>
     <% end %>
   </table>
 
   <div class="col-md-12 text-right">
-    <a href="#" class="btn btn-primary col-md-2">Download Zip (3)</a>
+    <a href="<%= zip_path(@committers.first.stock) %>" class="btn btn-primary col-md-2" download="zip">
+      Download Zip (<%= @committers.count %>)
+    </a>
   </div>
 <% end %>
