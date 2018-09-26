@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'index#index'
   get '/url' => 'index#show'
   get '/url/:url' => 'index#show'
+  get '/pdf/:id' => 'pdf#show', as: :pdf
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
