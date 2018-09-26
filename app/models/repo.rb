@@ -7,10 +7,22 @@ class Repo
   # @param url String адрес репо
   # @result Hash
   def self.get(url)
-    return unless (uri = url_4api(url))
-    return unless (committers = api_call(uri))
+    return 'пустой url' if url.blank?
+    return 'ошибка формата url' unless (uri = url_4api(url))
 
-    committers_format(committers)
+    cmtrs = api_call(uri)
+    return cmtrs if cmtrs.class == String
+    return 'несуществующий репозиторий' if cmtrs.class == Hash && cmtrs.dig('message') == 'Not Found'
+    return 'исчерпаны лимиты обращения к api.github.com' unless cmtrs.class == Array
+
+    committers_format(cmtrs)
+  end
+
+  # проверка - возвращенное значение ошибка?
+  # @param url String адрес репо
+  # @result Hash
+  def self.err?(value)
+    value.class == String
   end
 
   # приведение url репозитория к url запроса к api github
@@ -32,10 +44,9 @@ class Repo
       json = Net::HTTP.get(uri)
       result = JSON(json)
     rescue StandardError => e
-      return
+      return e.message
     end
-    return unless result.class == Array # лимит обращений
-
+    pp "#{__FILE__}, #{__LINE__} | self.api_call(#{uri})=#{result.inspect}"
     result
   end
 
@@ -45,8 +56,8 @@ class Repo
   private_class_method def self.committers_format(committers)
     # контрибуторы уже упорядочены в json, от меньших к большим
     committers.map { |rs| { total: rs['total'], author: rs['author']['login'] } }
-        .last(3)
-        .reverse
-        .map.with_index { |rs, j| rs.merge(place: j + 1) }
+              .last(3)
+              .reverse
+              .map.with_index { |rs, j| rs.merge(place: j + 1) }
   end
 end

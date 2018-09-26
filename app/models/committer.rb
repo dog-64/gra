@@ -1,22 +1,22 @@
 # комиттеры в репозитории
 class Committer < ApplicationRecord
-
   validates :repo, presence: true
   validates :author, presence: true
   validates :total, presence: true
   validates :place, presence: true
   validates :stock, presence: true
 
-  # каталог для записи 
-  DIR = "#{Rails.root}/temp/awards".freeze
+  # каталог для записи
+  DIR = Rails.root.join('temp', 'awards').freeze
 
   # запись в БД топа комиттеров в репо
   # @params url String адрес репозитория
   # @params ActiveRecord::Relation список записей
   def self.create_by_url(url)
-    return unless (committers = Repo.get(url))
+    cmtrs = Repo.get(url)
+    return cmtrs if Repo.err?(cmtrs)
 
-    committers_2table(committers, url)
+    committers_2table(cmtrs, url)
   end
 
   # создание pdf для коммиттера
@@ -68,23 +68,22 @@ class Committer < ApplicationRecord
   # запись комитеров в таблицу БД
   # старые по этому репо удаляются
   private_class_method def self.committers_2table(committers, url)
-                         Committer.where(repo: url).delete_all
-                         ids = committers_create(committers, url)
-                         Committer.where(stock: ids[0])
-                       end
+    Committer.where(repo: url).delete_all
+    ids = committers_create(committers, url)
+    Committer.where(stock: ids[0])
+  end
 
   # создание записей в таблице БД по переданным комитерам
   private_class_method def self.committers_create(committers, url)
-                         ids = []
-                         Committer.transaction do
-                           committers.each do |cmt|
-                             c = cmt + { repo: url, stock: 0 }
-                             rc = Committer.create(c)
-                             ids << rc.id
-                           end
-                           Committer.where(id: ids).update_all(stock: ids[0])
-                         end
-                         ids
-                       end
-
+    ids = []
+    Committer.transaction do
+      committers.each do |cmt|
+        c = cmt + { repo: url, stock: 0 }
+        rc = Committer.create(c)
+        ids << rc.id
+      end
+      Committer.where(id: ids).update_all(stock: ids[0])
+    end
+    ids
+  end
 end

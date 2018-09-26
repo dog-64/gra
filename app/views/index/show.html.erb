@@ -1,9 +1,8 @@
 <%= render 'form' %>
 
-<% unless @committers.present? %>
+<% if Repo.err? @committers %>
   <div class="alert alert-danger" role="alert">
-    Ошибка получения данных по репозиторию.
-    Проверьте адрес и повторите.
+    <%= @committers %>
   </div>
 <% else %>
   <h2>Results</h2>
