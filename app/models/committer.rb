@@ -14,7 +14,7 @@ class Committer < ApplicationRecord
   # @params url String адрес репозитория
   # @params ActiveRecord::Relation список записей
   def self.create_by_url(url)
-    return unless (committers = Repo.get(url.strip))
+    return unless (committers = Repo.get(url))
 
     committers_2table(committers, url)
   end

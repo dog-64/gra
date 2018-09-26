@@ -18,7 +18,7 @@ class Repo
   # @result String
   def self.url_4api(url)
     return if url.blank?
-    return unless url =~ %r{(https|http)://github.com/([^/]+)/([^/]+)}
+    return unless url =~ %r{\s*(https|http)://github.com/([^/]+)/([^/\s]+)\s*}
 
     URI("https://api.github.com/repos/#{$2}/#{$3}/stats/contributors")
   end
