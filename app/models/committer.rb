@@ -35,6 +35,28 @@ class Committer < ApplicationRecord
     r
   end
 
+  require 'zip'
+
+  # упаковать файлы дипломов комитеров в zip
+  # @params ActiveRecord::Relation список записей
+  # @return String имя файла архива
+  def self.to_zip(cmtrs, params)
+    return if cmtrs.blank?
+    return if params[:id].blank?
+
+    input_filenames = cmtrs.inject([]) { |sum, cmtr| sum << Committer.pdf(cmtr.id) }
+
+    zipfile_name = "tmp/awards_#{params[:id]}.zip"
+    File.unlink(zipfile_name) if File.file?(zipfile_name)
+
+    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+      input_filenames.each do |filename|
+        zipfile.add(filename, filename)
+      end
+    end
+    zipfile_name
+  end
+
   # запись комитеров в таблицу БД
   # старые по этому репо удаляются
   private_class_method def self.committers_2table(committers, url)

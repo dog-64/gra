@@ -14,6 +14,18 @@ describe Committer, type: :model do
     expect(FactoryBot.create(:committer)).not_to be nil
   end
 
+  describe 'to_zip' do
+    it ('nil') { expect(Committer.to_zip(nil, {})).to be nil }
+    it ('string') { expect(Committer.to_zip('xxx', {})).to be nil }
+    it ('not exist') { expect(Committer.to_zip(uniqp, {})).to be nil }
+    it ('ok') do
+      cmtr = FactoryBot.create(:committer)
+      r = Committer.to_zip(Committer.where(id: cmtr.id), {id: cmtr.id})
+      expect(r).not_to be nil
+      expect(File.file?(r)).not_to be nil
+    end
+  end
+
   describe 'pdf' do
     it ('nil') { expect(Committer.pdf(nil)).to be nil }
     it ('string') { expect(Committer.pdf('xxx')).to be nil }
