@@ -22,8 +22,7 @@ describe Committer, type: :model do
       cmtr = FactoryBot.create(:committer)
       r = Committer.pdf(cmtr.id)
       expect(r).not_to be nil
-      expect(r).not_to be nil
-
+      expect(File.file?(r)).not_to be nil
     end
   end
 
