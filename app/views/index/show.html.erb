@@ -1,10 +1,11 @@
 <%= render 'form' %>
+
 <% unless @committers.present? %>
   <div class="alert alert-danger" role="alert">
     Ошибка получения данных по репозиторию.
     Проверьте адрес и повторите.
   </div>
-<% else @committers.present? %>
+<% else %>
   <table class="table">
     <thead>
     <tr>
@@ -14,15 +15,17 @@
       <th></th>
     </tr>
     </thead>
-    <% @commiters.each do |cmtr| %>
+    <% @committers.each do |cmtr| %>
       <tr>
         <td><%= cmtr.place %></td>
         <th><%= cmtr.author %></th>
         <td><%= cmtr.total %></td>
-        <td><a href="pdf/#{cmtr.id}">download pdf</a></td>
+        <td><a href="pdf/#{cmtr.id}" class="btn btn-info float-right col-md-6">download pdf</a></td>
       </tr>
     <% end %>
   </table>
 
-  <a href="#">Download Zip (3)</a>
+  <div class="col-md-12 text-right">
+    <a href="#" class="btn btn-primary col-md-2">Download Zip (3)</a>
+  </div>
 <% end %>

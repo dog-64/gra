@@ -13,7 +13,18 @@ class Committer < ApplicationRecord
   def self.create_by_url(url)
     return unless (committers = Repo.get(url))
 
+    committers_2table(committers, url)
+  end
+
+  private
+
+  def self.committers_2table(committers, url)
     Committer.where(repo: url).delete_all
+    ids = committers_create(committers, url)
+    Committer.where(stock: ids[0])
+  end
+
+  def self.committers_create(committers, url)
     ids = []
     Committer.transaction do
       committers.each do |cmt|
@@ -23,6 +34,7 @@ class Committer < ApplicationRecord
       end
       Committer.where(id: ids).update_all(stock: ids[0])
     end
-    Committer.where(stock: ids[0])
+    ids
   end
+
 end
