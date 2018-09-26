@@ -23,13 +23,8 @@ tmp/**/*
 coverage
 /.idea/
 
-.sass-cache/
-.stfolder
-.sync/Archive/
-.sync/ID
 _backup/
 _src/
 _test/
-app/offline/dist/
 webrat.log
 .DS_Store
