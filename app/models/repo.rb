@@ -8,7 +8,7 @@ class Repo
   # @result Hash
   def self.get(url)
     return if url.blank?
-    return unless url =~ %r{(https|http)://github.com/(\w+)/(\w+)}
+    return unless url =~ %r{(https|http)://github.com/([^/]+)/([^/]+)}
     uri = URI("https://api.github.com/repos/#{$2}/#{$3}/stats/contributors")
 
     begin

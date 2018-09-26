@@ -7,21 +7,22 @@ class Committer < ApplicationRecord
   validates :place, presence: true
   validates :stock, presence: true
 
-  # запись в БД топа комиттеров
+  # запись в БД топа комиттеров в репо
   # @params url String адрес репозитория
   # @params ActiveRecord::Relation список записей
   def self.create_by_url(url)
     return unless (committers = Repo.get(url))
 
     Committer.where(repo: url).delete_all
+    ids = []
     Committer.transaction do
-      ids = committers.map do |cmt|
+      committers.each do |cmt|
         c = cmt + { repo: url, stock: 0 }
         rc = Committer.create(c)
-        rc.id
+        ids << rc.id
       end
       Committer.where(id: ids).update_all(stock: ids[0])
     end
-    Committer.where(id: ids)
+    Committer.where(stock: ids[0])
   end
 end
