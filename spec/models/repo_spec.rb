@@ -27,7 +27,7 @@ describe Repo do
       expect(r[2][:total]).to eq 3282
       expect(r[2][:place]).to eq 3
     end
-    it('nil') {expect(Repo.get(nil)).to be nil}
-    it('bad url') {expect(Repo.get('http://duletsky.ru')).to be nil}
+    it('nil') {expect(Repo.get(nil)).to eq "пустой url"}
+    it('bad url') {expect(Repo.get('http://duletsky.ru')).to eq "ошибка формата url"}
   end
 end

@@ -59,7 +59,7 @@ describe Committer, type: :model do
       expect(r.place).to eq 1
       expect(r.total).to eq 4220
     end
-    it('nil') { expect(Committer.create_by_url(nil)).to be nil }
-    it('empty') { expect(Committer.create_by_url('')).to be nil }
+    it('nil') { expect(Committer.create_by_url(nil)).to eq "пустой url" }
+    it('empty') { expect(Committer.create_by_url('')).to eq "пустой url" }
   end
 end

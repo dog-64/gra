@@ -46,7 +46,6 @@ class Repo
     rescue StandardError => e
       return e.message
     end
-    pp "#{__FILE__}, #{__LINE__} | self.api_call(#{uri})=#{result.inspect}"
     result
   end
 

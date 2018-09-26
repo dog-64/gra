@@ -4,6 +4,5 @@ class IndexController < ApplicationController
 
   def show
     @committers = Committer.create_by_url(params[:url])
-    pp "#{__FILE__}, #{__LINE__} | @committers=#{@committers.inspect}"
   end
 end
