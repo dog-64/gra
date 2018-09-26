@@ -31,6 +31,5 @@ _backup/
 _src/
 _test/
 app/offline/dist/
-/bin/
 webrat.log
 .DS_Store

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -60,7 +60,7 @@ group :development, :test do
 
   gem 'action-cable-testing'
   gem 'spring-commands-rspec'
-  gem "factory_bot_rails", "~> 4.0"
+  gem 'factory_bot_rails', '~> 4.0'
 end
 
 group :development do
@@ -76,8 +76,8 @@ end
 group :test do
   # gem 'launchy' # показ страницы в rspec по save_and_open_page
   gem 'simplecov', require: false
-  gem 'webrat'
   gem 'webdrivers'
+  gem 'webrat'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -93,8 +93,10 @@ gem 'derailed_benchmarks', group: :development # анализ испольова
 
 gem 'json'
 gem 'nokogiri'
-gem 'mysql2', '~> 0.3.18'
+# gem 'mysql2', '~> 0.3.18'
 
 gem 'prawn' # генерация pdf
 gem 'jquery-rails'
 gem 'rubyzip' # создание архивов
+
+ruby '2.4.1'
