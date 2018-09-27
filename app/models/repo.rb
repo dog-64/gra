@@ -5,7 +5,7 @@ class Repo
 
   # взятие данных о комиттерах репозитория
   # @param url String адрес репо
-  # @result Hash
+  # @return Hash | String
   def self.get(url)
     return 'пустой url' if url.blank?
     return 'ошибка формата url' unless (uri = url_4api(url))
@@ -20,24 +20,24 @@ class Repo
 
   # проверка - возвращенное значение ошибка?
   # @param url String адрес репо
-  # @result Hash
+  # @return True | False
   def self.err?(value)
     value.class == String
   end
 
   # приведение url репозитория к url запроса к api github
   # @param url String адрес репо
-  # @result String
+  # @return String
   def self.url_4api(url)
     return if url.blank?
     return unless url =~ %r{\s*(https|http)://github.com/([^/]+)/([^/\s]+)\s*}
 
-    URI("https://api.github.com/repos/#{$2}/#{$3}/stats/contributors")
+    URI("https://api.github.com/repos/#{Regexp.last_match(2)}/#{Regexp.last_match(3)}/stats/contributors")
   end
 
   # приведение url репозитория к url запроса к api github
   # @param uri String адрес запроса к api github
-  # @result String
+  # @return String | Hash | Array
   private_class_method def self.api_call(uri)
     result = nil
     begin

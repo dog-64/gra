@@ -4,6 +4,7 @@ require 'webmock/rspec'
 URL = 'https://github.com/rails/rails'
 
 describe Committer, type: :model do
+  # noinspection RubyBlockToMethodReference
   before(:each) { mock_github }
 
   it 'фабрика valid' do
@@ -26,10 +27,10 @@ describe Committer, type: :model do
   end
 
   describe 'to_zip' do
-    it ('nil') { expect(Committer.to_zip(nil, {})).to be nil }
-    it ('string') { expect(Committer.to_zip('xxx', {})).to be nil }
-    it ('not exist') { expect(Committer.to_zip(uniqp, {})).to be nil }
-    it ('ok') do
+    it('nil') { expect(Committer.to_zip(nil, {})).to be nil }
+    it('string') { expect(Committer.to_zip('xxx', {})).to be nil }
+    it('not exist') { expect(Committer.to_zip(uniqp, {})).to be nil }
+    it('ok') do
       cmtr = FactoryBot.create(:committer)
       r = Committer.to_zip(Committer.where(id: cmtr.id), { id: cmtr.id })
       expect(r).not_to be nil
@@ -38,10 +39,10 @@ describe Committer, type: :model do
   end
 
   describe 'pdf' do
-    it ('nil') { expect(Committer.pdf(nil)).to be nil }
-    it ('string') { expect(Committer.pdf('xxx')).to be nil }
-    it ('not exist') { expect(Committer.pdf(uniqp)).to be nil }
-    it ('ok') do
+    it('nil') { expect(Committer.pdf(nil)).to be nil }
+    it('string') { expect(Committer.pdf('xxx')).to be nil }
+    it('not exist') { expect(Committer.pdf(uniqp)).to be nil }
+    it('ok') do
       cmtr = FactoryBot.create(:committer)
       r = Committer.pdf(cmtr.id)
       expect(r).not_to be nil
