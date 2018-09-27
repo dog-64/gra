@@ -62,6 +62,7 @@ class Committer < ApplicationRecord
 
   # очистка временных файлов
   def self.zap
+    Committer.where('updated_at < ?', 1.day.ago).delete_all
     FileUtils.rm_rf("#{DIR}/.", secure: true)
   end
 
