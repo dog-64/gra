@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'index#index'
   get '/url' => 'index#show'
-  get '/url/:url' => 'index#show', as: :url_id
+  post '/url' => 'index#show'
   get '/pdf/:id' => 'pdf#show', as: :pdf
   get '/zip/:id' => 'zip#show', as: :zip
 
