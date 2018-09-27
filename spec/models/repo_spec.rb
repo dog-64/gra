@@ -3,7 +3,14 @@ require 'rails_helper'
 require 'webmock/rspec'
 
 describe Repo do
-  before(:each) {mock_github}
+  # noinspection RubyBlockToMethodReference
+  before(:each) { mock_github }
+
+  describe 'err?' do
+    it('true') { expect(Repo.err?('123')).to be true }
+    it('false 4 hash') { expect(Repo.err?(x: 123)).to be false }
+    it('false 4 array') { expect(Repo.err?([123])).to be false }
+  end
 
   describe 'url_4api' do
     it 'awesome-elixir' do
@@ -27,7 +34,7 @@ describe Repo do
       expect(r[2][:total]).to eq 3282
       expect(r[2][:place]).to eq 3
     end
-    it('nil') {expect(Repo.get(nil)).to eq "пустой url"}
-    it('bad url') {expect(Repo.get('http://duletsky.ru')).to eq "ошибка формата url"}
+    it('nil') { expect(Repo.get(nil)).to eq 'пустой url' }
+    it('bad url') { expect(Repo.get('http://duletsky.ru')).to eq 'ошибка формата url' }
   end
 end
